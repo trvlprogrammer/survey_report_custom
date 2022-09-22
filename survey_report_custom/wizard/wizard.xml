@@ -1,0 +1,30 @@
+<odoo>
+	           <record model="ir.ui.view" id="wizard_survey_report_form_view">
+                <field name="name">wizard.survey.report.form</field>
+                <field name="model">wizard.survey.report</field>
+                <field name="arch" type="xml">
+                    <form string="wizard_survey_report">
+                    	<field name="flaging" invisible = "1"/>
+                    	<field name="message" attrs="{ 'invisible': [('flaging', '=', False )] }"/>
+                        <footer>
+		                    <button name="get_report" string="Export to XLS" type="object" class="oe_highlight"/>
+		                    <button string="Cancel" special="cancel"/>
+		                </footer>
+                    </form>
+                </field>
+            </record>
+            
+			
+			<record id="action_wizard_survey_report" model="ir.actions.act_window">
+            <field name="name">Export to XLS</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">wizard.survey.report</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="wizard_survey_report_form_view"/>
+            <field name="context">{}</field>
+            <field name="target">new</field>
+            <field name="help">This wizard will help to generate report xls.</field>
+            <field name="binding_model_id" ref="survey.model_survey_user_input" />
+            <field name="binding_view_types">list</field>
+        	</record>
+</odoo>

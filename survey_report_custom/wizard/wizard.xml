@@ -4,8 +4,8 @@
                 <field name="model">wizard.survey.report</field>
                 <field name="arch" type="xml">
                     <form string="wizard_survey_report">
-                    	<field name="flaging" invisible = "1"/>
-                    	<field name="message" attrs="{ 'invisible': [('flaging', '=', False )] }"/>
+                    	<field name="file_name" readonly="1"/>
+                    	<field name="excel_file" readonly="1"/>
                         <footer>
 		                    <button name="get_report" string="Export to XLS" type="object" class="oe_highlight"/>
 		                    <button string="Cancel" special="cancel"/>

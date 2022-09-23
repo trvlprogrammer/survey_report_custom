@@ -7,7 +7,7 @@
                     	<field name="file_name" readonly="1"/>
                     	<field name="excel_file" readonly="1"/>
                         <footer>
-		                    <button name="get_report" string="Export to XLS" type="object" class="oe_highlight"/>
+		                    <button name="get_report" string="Export to XLS" type="object" class="oe_highlight" attrs="{ 'invisible': [('file_name', '!=', False )] }"/>
 		                    <button string="Cancel" special="cancel"/>
 		                </footer>
                     </form>

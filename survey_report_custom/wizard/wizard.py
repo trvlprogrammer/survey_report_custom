@@ -4,6 +4,7 @@ import xlsxwriter
 import base64
 import datetime
 from odoo.exceptions import UserError, ValidationError
+import os
 
 class wizardSurveyReport(models.TransientModel):
     
@@ -15,6 +16,9 @@ class wizardSurveyReport(models.TransientModel):
     
     
     def get_report(self):
+        
+        get_param = self.env['ir.config_parameter'].sudo().get_param   
+        file_store = get_param('file_store')
         
         #get selected active ids
         active_ids = tuple(self._context["active_ids"])
@@ -143,8 +147,9 @@ class wizardSurveyReport(models.TransientModel):
         now = datetime.date.today()
         date = now.strftime("%d-%m-%Y")
         file_name = f"survey_report_{str(date)}.xlsx"
+        path_file = os.path.join(file_store,file_name)
         
-        workbook = xlsxwriter.Workbook(file_name)
+        workbook = xlsxwriter.Workbook(path_file)
         worksheet = workbook.add_worksheet()
         bold = workbook.add_format({'bold': 1})
         worksheet.merge_range('A1:F3', survey_data["survey_title"],bold)
@@ -224,7 +229,7 @@ class wizardSurveyReport(models.TransientModel):
         #####################################################################
         
         # open file and save as binary in wizard model
-        with open(file_name, "rb") as file:
+        with open(path_file, "rb") as file:
             file_base64 = base64.b64encode(file.read())
             
         self.file_name = file_name

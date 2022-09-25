@@ -144,8 +144,8 @@ class wizardSurveyReport(models.TransientModel):
         
         ######################Processing generate xls file###################
                         
-        now = datetime.date.today()
-        date = now.strftime("%d-%m-%Y")
+        now = datetime.datetime.now()
+        date = now.strftime("%d_%m_%Y_%H_%M_%S")
         file_name = f"survey_report_{str(date)}.xlsx"
         path_file = os.path.join(file_store,file_name)
         
